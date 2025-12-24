@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HUMECH — Right the First Time</title>
+
+    <style>
+      :root{
+        --bg:#ffffff;
+        --text:#0b1220;
+        --muted:#6b7280;
+        --line:#e5e7eb;
+        --card:#f8fafc;
+
+        --btn:#0b1220;
+        --btnText:#ffffff;
+
+        --btn2Bg:#ffffff;
+        --btn2Text:#0b1220;
+
+        --max: 1180px;
+        --radius: 18px;
+      }
+
+      *{box-sizing:border-box}
+      body{
+        margin:0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        background:var(--bg);
+        color:var(--text);
+      }
+      a{color:inherit; text-decoration:none}
+      .container{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+      /* ===== Top Nav ===== */
+      header{padding:40px 0 16px;}
+      .topbar{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:18px;
+      }
+      .brand{
+        display:flex;
+        align-items:center;
+        gap:16px;
+        font-weight:800;
+        letter-spacing:.02em;
+      }
+      .brand .mark{
+        width:52px; height:52px;
+        background:#d9d9d9;
+      }
+
+      nav{
+        display:flex;
+        align-items:center;
+        gap:28px;
+      }
+      nav a{
+        font-size:14px;
+        font-weight:700;
+        color:#111827;
+        text-decoration: underline;
+        text-underline-offset: 7px;
+        text-decoration-thickness: 2px;
+        text-decoration-color: rgba(17,24,39,.35);
+      }
+      nav a.active{ text-decoration-color: rgba(17,24,39,.85); }
+
+      /* ===== Hero ===== */
+      .hero{ padding:40px 0 56px; }
+      .heroGrid{
+        display:grid;
+        grid-template-columns: 0.95fr 1.25fr;
+        gap:70px;
+        align-items:center;
+      }
+      h1{
+        margin:0 0 10px;
+        font-size:64px;
+        line-height:1.0;
+        letter-spacing:-.04em;
+      }
+      .jp{
+        margin:0 0 22px;
+        font-size:22px;
+        font-weight:800;
+        color:#1f2937;
+      }
+      .desc{
+        margin:0 0 30px;
+        color:var(--muted);
+        font-size:16px;
+        line-height:2.0;
+        max-width: 46ch;
+      }
+      .btnRow{ display:flex; gap:14px; flex-wrap:wrap; }
+      .btn{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        padding:13px 20px;
+        border-radius:14px;
+        border:1px solid var(--line);
+        font-weight:800;
+        font-size:14px;
+        cursor:pointer;
+        user-select:none;
+      }
+      .btn.primary{ background:var(--btn); color:var(--btnText); border-color:var(--btn); }
+      .btn.secondary{ background:var(--btn2Bg); color:var(--btn2Text); }
+
+      .heroImageWrap{
+        width:100%;
+        height:330px;
+        border-radius: 14px;
+        overflow:hidden;
+        background:#0b1220;
+      }
+      .heroImageWrap img{
+        width:100%;
+        height:100%;
+        display:block;
+        object-fit:cover;
+        object-position:center;
+      }
+
+      /* ===== Sections ===== */
+      section{ border-top:1px solid var(--line); padding:56px 0; }
+      .sectionHead{
+        display:flex;
+        align-items:flex-end;
+        justify-content:space-between;
+        gap:16px;
+        margin-bottom:18px;
+      }
+      .sectionHead h2{
+        margin:0;
+        font-size:28px;
+        letter-spacing:-.02em;
+      }
+      .sectionHead p{
+        margin:0;
+        color:var(--muted);
+        max-width:68ch;
+        font-size:14px;
+        line-height:1.8;
+      }
+
+      .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+      .grid3{ display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; }
+      .grid4{ display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; }
+
+      .card{
+        background:var(--card);
+        border:1px solid var(--line);
+        border-radius:var(--radius);
+        padding:18px;
+      }
+      .card h3{ margin:0 0 8px; font-size:16px; }
+      .card p{ margin:0; color:var(--muted); font-size:14px; line-height:1.8; }
+
+      .pillRow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+      .pill{
+        background:#fff;
+        border:1px solid var(--line);
+        border-radius:999px;
+        padding:8px 12px;
+        font-size:13px;
+        color:#111827;
+        font-weight:700;
+      }
+
+      /* Simple pipeline */
+      .pipeline{
+        background:#fff;
+        border:1px solid var(--line);
+        border-radius:var(--radius);
+        padding:16px;
+      }
+      .pipelineRow{
+        display:grid;
+        grid-template-columns: 1fr 40px 1fr 40px 1fr 40px 1fr;
+        gap:10px;
+        align-items:center;
+      }
+      .pipeItem{
+        border:1px solid var(--line);
+        background:#fbfdff;
+        border-radius:999px;
+        padding:10px 12px;
+        font-size:13px;
+        font-weight:800;
+      }
+      .arrow{ text-align:center; color:var(--muted); font-weight:900; user-select:none; }
+
+      /* Process steps */
+      .steps{ display:grid; gap:12px; }
+      .step{
+        display:flex; gap:12px; align-items:flex-start;
+        background:#fff;
+        border:1px solid var(--line);
+        border-radius:var(--radius);
+        padding:14px;
+      }
+      .num{
+        width:34px; height:34px;
+        border-radius:12px;
+        border:1px solid var(--line);
+        background:#eef2ff;
+        display:flex; align-items:center; justify-content:center;
+        font-weight:900;
+      }
+      .step h4{ margin:0 0 4px; }
+      .step p{ margin:0; color:var(--muted); font-size:14px; line-height:1.8; }
+
+      /* Risk rows */
+      .riskList{ display:grid; gap:12px; }
+      .riskRow{
+        display:grid;
+        grid-template-columns: 1fr 1.3fr;
+        gap:12px;
+        border:1px solid var(--line);
+        background:#fff;
+        border-radius:var(--radius);
+        padding:14px;
+      }
+      .riskRow b{ display:block; margin-bottom:6px; }
+      .riskRow .right{ color:var(--muted); }
+
+      /* Big CTA */
+      .ctaBox{
+        background: linear-gradient(135deg, #0b1220, #111827);
+        color:#fff;
+        border-radius: 22px;
+        padding:24px;
+        border:1px solid rgba(255,255,255,.12);
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:14px;
+        flex-wrap:wrap;
+      }
+      .ctaBox h2{ margin:0; font-size:24px; letter-spacing:-.02em; }
+      .ctaBox p{ margin:6px 0 0; color:rgba(255,255,255,.75); line-height:1.8; }
+      .ctaBox .btn{ border-color: rgba(255,255,255,.18); }
+      .ctaBox .btn.primary{ background:#fff; color:#0b1220; border-color:#fff; }
+
+      /* ===== Footer ===== */
+      footer{
+        border-top:1px solid var(--line);
+        padding:18px 0;
+      }
+      .footerRow{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:18px;
+        flex-wrap:wrap;
+      }
+      .footerLeft{
+        display:flex;
+        align-items:center;
+        gap:24px;
+      }
+      .footerBrand{
+        display:flex;
+        align-items:center;
+        gap:12px;
+        font-weight:800;
+      }
+      .footerLinks{
+        display:flex;
+        gap:22px;
+        color:var(--muted);
+        font-size:13px;
+        font-weight:700;
+      }
+      .social{
+        display:flex;
+        gap:16px;
+        align-items:center;
+      }
+      .social svg{ width:18px; height:18px; opacity:.75; }
+      .social svg:hover{ opacity:1; }
+
+      /* Responsive */
+      @media (max-width: 1020px){
+        .heroGrid{ grid-template-columns:1fr; gap:22px; }
+        h1{ font-size:50px; }
+        .heroImageWrap{ height:300px; }
+        .grid4{ grid-template-columns:1fr 1fr; }
+        .grid3{ grid-template-columns:1fr; }
+        .grid2{ grid-template-columns:1fr; }
+        .pipelineRow{ grid-template-columns:1fr; }
+        .arrow{ display:none; }
+        .riskRow{ grid-template-columns:1fr; }
+      }
+      @media (max-width: 620px){
+        nav{ display:none; }
+        h1{ font-size:44px; }
+        .heroImageWrap{ height:240px; }
+        .grid4{ grid-template-columns:1fr; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAV -->
+    <header>
+      <div class="container">
+        <div class="topbar">
+          <a class="brand" href="#top">
+            <span class="mark" aria-hidden="true"></span>
+            <span>HUMECH</span>
+          </a>
+
+          <nav aria-label="Top navigation">
+            <a href="#what">What</a>
+            <a href="#services">Services</a>
+            <a class="active" href="#risk">Risk &amp; Mitigation</a>
+            <a href="#roadmap">Roadmap</a>
+            <a href="#contact">Contact</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO (same as your photo style) -->
+    <main id="top" class="hero">
+      <div class="container">
+        <div class="heroGrid">
+          <div>
+            <h1>Right the First<br/>Time</h1>
+            <p class="jp">最初から正確に。</p>
+
+            <p class="desc">
+              Specialized AI-annotation and Data<br/>
+              Labeling Hub for Japanese Medical<br/>
+              Tech in Dhaka, Bangladesh
+            </p>
+
+            <div class="btnRow">
+              <a class="btn primary" href="#contact">Schedule a call</a>
+              <a class="btn secondary" href="#protocols">View Protocols</a>
+            </div>
+          </div>
+
+            <div class="heroImageWrap" aria-label="Hero image">
+  <img src="brain.png?v=2" alt="Medical AI hero image" />
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- SECTION: What is HUMECH -->
+    <section id="what">
+      <div class="container">
+        <div class="sectionHead">
+          <div>
+            <h2>What is HUMECH?</h2>
+            <p>
+              HUMECH is a specialized annotation and quality-control hub built for Japanese medical AI teams.
+              We focus on audit-ready outputs, secure operations, and consistent clinical accuracy — not generic low-cost labeling.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <h3>Built for clinical-grade accuracy</h3>
+            <p>
+              Definitions, calibration, and multi-layer review are embedded into the workflow so your dataset improves over time.
+            </p>
+
+            <div class="pillRow">
+              <span class="pill">Clear label definitions</span>
+              <span class="pill">Gold dataset calibration</span>
+              <span class="pill">Dual QC</span>
+            </div>
+          </div>
+
+          <div class="pipeline" aria-label="Pipeline diagram">
+            <h3 style="margin:0 0 10px;">Simple workflow</h3>
+            <div class="pipelineRow">
+              <div class="pipeItem">Secure Access Setup</div>
+              <div class="arrow">→</div>
+              <div class="pipeItem">Annotation Production</div>
+              <div class="arrow">→</div>
+              <div class="pipeItem">Multi-layer QC</div>
+              <div class="arrow">→</div>
+              <div class="pipeItem">Delivery + Feedback</div>
+            </div>
+            <p style="margin:12px 0 0; color:var(--muted); font-size:13px; line-height:1.8;">
+              Keep this diagram simple. It’s for clarity — not decoration.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Services / Scope -->
+    <section id="services">
+      <div class="container">
+        <div class="sectionHead">
+          <div>
+            <h2>Services & Scope</h2>
+            <p>
+              Clear scope reduces rework. Below are typical deliverables for Japanese MedTech teams (custom formats supported).
+            </p>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="card">
+            <h3>Medical Image Annotation</h3>
+            <p>
+              Segmentation, classification, landmarks, bounding boxes, series-level labeling (DICOM/NIfTI).
+            </p>
+            <div class="pillRow">
+              <span class="pill">Segmentation</span>
+              <span class="pill">Landmarks</span>
+              <span class="pill">DICOM/NIfTI</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Medical Text & Structured Data</h3>
+            <p>
+              Clinical notes labeling, normalization, coding support, metadata validation.
+            </p>
+            <div class="pillRow">
+              <span class="pill">Text labeling</span>
+              <span class="pill">Normalization</span>
+              <span class="pill">Metadata QC</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Quality Control & Review</h3>
+            <p>
+              Dual review, adjudication, spot-check sampling, edge-case escalation, audit trails.
+            </p>
+            <div class="pillRow">
+              <span class="pill">Dual review</span>
+              <span class="pill">Adjudication</span>
+              <span class="pill">Audit-ready</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Who it's for -->
+    <section id="for">
+      <div class="container">
+        <div class="sectionHead">
+          <div>
+            <h2>Who we work with</h2>
+            <p>
+              If accuracy and compliance matter more than the lowest cost, HUMECH is designed for your workflow.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid4">
+          <div class="card"><h3>MedTech Manufacturers</h3><p>Device + diagnostics teams needing consistent labeling at scale.</p></div>
+          <div class="card"><h3>Healthcare AI Startups</h3><p>Fast iteration cycles with strict quality requirements.</p></div>
+          <div class="card"><h3>R&amp;D / Research Labs</h3><p>Edge cases and academically rigorous labeling definitions.</p></div>
+          <div class="card"><h3>Japanese Enterprises</h3><p>Audit-friendly operations, security-first delivery, stable throughput.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Why HUMECH -->
+    <section id="why">
+      <div class="container">
+        <div class="sectionHead">
+          <div>
+            <h2>Why HUMECH</h2>
+            <p>
+              We win on reliability: fewer revisions, fewer misunderstandings, and datasets that improve over time.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid4">
+          <div class="card">
+            <h3>Medical-trained talent</h3>
+            <p>Workforce aligned to medical accuracy, not generic labeling.</p>
+          </div>
+          <div class="card">
+            <h3>Japan-quality protocols</h3>
+            <p>Definitions, checklists, escalation rules, acceptance criteria.</p>
+          </div>
+          <div class="card">
+            <h3>Secure operations</h3>
+            <p>Restricted environments and controlled access design.</p>
+          </div>
+          <div class="card">
+            <h3>Right the First Time</h3>
+            <p>Reduced rework → faster model iteration.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Process -->
+    <section id="process">
+      <div class="container">
+        <div class="sectionHead">
+          <div>
+            <h2>How we work</h2>
+            <p>
+              A simple, repeatable delivery process that minimizes offshore risk and keeps your team in control.
+            </p>
+          </div>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="num">1</div>
+            <div>
+              <h4>Requirement alignment (Japan time)</h4>
+              <p>Confirm label definitions, edge cases, acceptance criteria, and reporting format.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="num">2</div>
+            <div>
+              <h4>Secure access setup</h4>
+              <p>Configure the agreed access method and operational restrictions before production starts.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="num">3</div>
+            <div>
+              <h4>Annotation + multi-layer QC</h4>
+              <p>Production labeling with dual-review and escalation for ambiguous/rare patterns.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="num">4</div>
+            <div>
+              <h4>Delivery & feedback loop</h4>
+              <p>Ship datasets with QC notes. Apply feedback to improve consistency each cycle.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Risk & Mitigation -->
+    <section id="risk">
+      <div class="container">
+        <div class="sectionHead">
+          <div>
+            <h2>Risk &amp; Mitigation</h2>
+            <p>
+              Offshore annotation has real risks. We make them explicit and mitigate them by design.
+            </p>
+          </div>
+        </div>
+
+        <div class="riskList">
+          <div class="riskRow">
+            <div>
+              <b>Risk: Data leakage</b>
+              Medical data requires strict operational controls.
+            </div>
+            <div class="right">
+              <b>Mitigation</b>
+              Restricted devices, access control, audit logs, and no uncontrolled transfer.
+            </div>
+          </div>
+
+          <div class="riskRow">
+            <div>
+              <b>Risk: Annotation inconsistency</b>
+              Different annotators interpret labels differently.
+            </div>
+            <div class="right">
+              <b>Mitigation</b>
+              Clear definitions, calibration rounds, gold datasets, and dual-review QC.
+            </div>
+          </div>
+
+          <div class="riskRow">
+            <div>
+              <b>Risk: Communication gaps</b>
+              Requirements get lost across time zones and language.
+            </div>
+            <div class="right">
+              <b>Mitigation</b>
+              Japan-time checkpoints, concise spec templates, escalation rules, weekly QA reports.
+            </div>
+          </div>
+
+          <div class="riskRow">
+            <div>
+              <b>Risk: Infrastructure instability</b>
+              Power/internet issues can slow delivery.
+            </div>
+            <div class="right">
+              <b>Mitigation</b>
+              Redundancy planning (UPS/generator) and schedule-buffered operations.
+            </div>
+          </div>
+        </div>
+
+        <div id="protocols" class="card" style="margin-top:16px;">
+          <h3>Quality protocols (preview)</h3>
+          <p>
+            Add a downloadable one-pager here: “Definitions → QC layers → Escalation rules → Acceptance criteria”.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Roadmap -->
+    <section id="roadmap">
+      <div class="container">
+        <div class="sectionHead">
+          <div>
+            <h2>Roadmap</h2>
+            <p>
+              A simple engagement model that gives enterprise teams predictability.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="card">
+            <h3>Month 1 — Setup</h3>
+            <p>Security setup, training, definitions, gold data calibration.</p>
+          </div>
+          <div class="card">
+            <h3>Month 2 — Production</h3>
+            <p>Live labeling with QC reporting and iteration cycles.</p>
+          </div>
+          <div class="card">
+            <h3>Month 3 — Scale</h3>
+            <p>Increase capacity, harden governance, deepen specialization.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: Contact CTA -->
+    <section id="contact">
+      <div class="container">
+        <div class="ctaBox">
+          <div>
+            <h2>Schedule a protocol review</h2>
+            <p>Discuss scope, security, and quality requirements with a technical call.</p>
+          </div>
+          <div class="btnRow">
+            <a class="btn primary" href="#">Schedule a call</a>
+            <a class="btn secondary" href="mailto:hello@humech.example">Email</a>
+          </div>
+        </div>
+
+        <div class="grid2" style="margin-top:16px;">
+          <div class="card">
+            <h3>Contact</h3>
+            <p>
+              <b>Email:</b> hello@humech.example<br/>
+              <b>Base:</b> Dhaka, Bangladesh<br/>
+              <b>Timezone:</b> JST collaboration available
+            </p>
+          </div>
+          <div class="card">
+            <h3>What to prepare</h3>
+            <p>
+              Dataset type (DICOM/NIfTI/text), labeling goal, acceptance criteria, security requirements, timeline.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER (same style as your photo) -->
+    <footer>
+      <div class="container">
+        <div class="footerRow">
+          <div class="footerLeft">
+            <div class="footerBrand">
+              <!-- 4-dot flower mark -->
+              <svg viewBox="0 0 24 24" fill="none" width="22" height="22" aria-hidden="true">
+                <circle cx="12" cy="12" r="2.2" fill="#0b1220"/>
+                <circle cx="12" cy="5"  r="1.6" fill="#0b1220"/>
+                <circle cx="19" cy="12" r="1.6" fill="#0b1220"/>
+                <circle cx="12" cy="19" r="1.6" fill="#0b1220"/>
+                <circle cx="5"  cy="12" r="1.6" fill="#0b1220"/>
+              </svg>
+              <span>HUMECH</span>
+            </div>
+
+            <div class="footerLinks">
+              <a href="#services">Features</a>
+              <a href="#what">Learn more</a>
+              <a href="#contact">Support</a>
+            </div>
+          </div>
+
+          <div class="social" aria-label="Social links">
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 4h4v16H4V4Z" fill="currentColor" opacity=".8"/>
+                <path d="M6 3.2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" fill="currentColor"/>
+                <path d="M10 9h4v2c.6-1.2 2-2.2 4-2.2 3 0 5 1.8 5 5.8V20h-4v-5.2c0-2-.6-3-2.2-3-1.3 0-2.1.8-2.4 1.6-.1.3-.1.8-.1 1.2V20h-4V9Z" fill="currentColor" opacity=".8"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="X">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 20L20 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M7 4h6l4 6v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
